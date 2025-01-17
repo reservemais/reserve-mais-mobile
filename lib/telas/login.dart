@@ -7,7 +7,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _identifierController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final Service services = Service();
 
@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     bool success = await services.login(
-      _identifierController.text,
+      _emailController.text,
       _passwordController.text,
     );
 
@@ -43,42 +43,129 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF8F8F8), // Fundo claro
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 32.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Título
               Text(
-                'Login',
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 16),
-              TextField(
-                controller: _identifierController,
-                decoration: InputDecoration(labelText: 'Login'),
-              ),
-              SizedBox(height: 16),
-              TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Senha'),
-                obscureText: true,
-              ),
-              SizedBox(height: 16),
-              _isLoading
-                  ? CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: _attemptLogin,
-                      child: Text('Entrar'),
-                    ),
-              if (_errorMessage.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Text(
-                    _errorMessage,
-                    style: TextStyle(color: Colors.red),
-                  ),
+                'RESERVE+',
+                style: TextStyle(
+                  fontSize: 38,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF002F67), // Azul escuro
                 ),
+              ),
+              SizedBox(height: 50),
+
+              // Campo E-mail
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'E-mail',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xFF002F67), // Azul escuro
+                    ),
+                  ),
+                  SizedBox(height: 3),
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(color: Color(0xFF002F67)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(color: Color(0xFF002F67)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(color: Color(0xFF002F67)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+
+              // Campo Senha
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Senha',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xFF002F67), // Azul escuro
+                    ),
+                  ),
+                  SizedBox(height: 3),
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(color: Color(0xFF002F67)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(color: Color(0xFF002F67)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(color: Color(0xFF002F67)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 30),
+
+              if (_errorMessage.isNotEmpty)
+                Text(
+                  _errorMessage,
+                  style: TextStyle(color: Colors.red),
+                ),
+
+              // Botão Entrar
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: _isLoading ? null : _attemptLogin,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFFFA500), // Laranja
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: _isLoading
+                      ? CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        )
+                      : Text(
+                          'ENTRAR',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                ),
+              ),
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reserve_mais_mobile/telas/reservations.dart';
+import 'package:reserve_mais_mobile/telas/solicitations.dart';
 import 'package:reserve_mais_mobile/telas/login.dart';
 
 void main() {
@@ -17,55 +18,50 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(),
-        '/home': (context) => ReservationsCalendarPage(),
+        '/home': (context) => HomePage(),
       },
     );
   }
 }
 
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
 
+  // Lista de telas associadas à barra de navegação
+  final List<Widget> _screens = [
+    ReservationsCalendarPage(), // Tela do calendário de reservas
+    SolicitationsPage(), // Tela de solicitações
+  ];
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index; // Atualiza o índice ao selecionar um ícone
+    });
+  }
 
-
-
-
-
-
-
-
-// import 'dart:ui';
-
-// import 'package:calendar_view/calendar_view.dart';
-// import 'package:flutter/material.dart';
-
-// DateTime get _now => DateTime.now();
-
-// void main() {
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return CalendarControllerProvider(
-//       controller: EventController()..addAll(_events),
-//       child: MaterialApp(
-//         home: Scaffold(
-//           body: MonthView(),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// List<CalendarEventData> _events = [
-//   CalendarEventData(
-//       date: _now,
-//       title: "teste",
-//       description: "Today is project meeting.",
-//       startTime: DateTime.parse("2024-05-22T15:10:00.000Z"),
-//       endTime: DateTime.parse("2024-05-22T15:20:00.000Z"),
-//       color: const Color(0xFF039BE5))
-// ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Reservas',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.inbox),
+            label: 'Solicitações',
+          ),
+        ],
+      ),
+    );
+  }
+}

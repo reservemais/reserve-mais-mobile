@@ -26,6 +26,7 @@ class Attributes {
   final String createdAt;
   final String updatedAt;
   final String publishedAt;
+  final Requester? requester;
 
   Attributes({
     required this.title,
@@ -38,6 +39,7 @@ class Attributes {
     required this.createdAt,
     required this.updatedAt,
     required this.publishedAt,
+    this.requester,
   });
 
   factory Attributes.fromJson(Map<String, dynamic> json) {
@@ -52,6 +54,43 @@ class Attributes {
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
       publishedAt: json['publishedAt'],
+      requester: json['requester'] != null
+          ? Requester.fromJson(json['requester']['data'])
+          : null,
+    );
+  }
+}
+
+class Requester {
+  final int id;
+  final RequesterAttributes attributes;
+
+  Requester({
+    required this.id,
+    required this.attributes,
+  });
+
+  factory Requester.fromJson(Map<String, dynamic> json) {
+    return Requester(
+      id: json['id'],
+      attributes: RequesterAttributes.fromJson(json['attributes']),
+    );
+  }
+}
+
+class RequesterAttributes {
+  final String username;
+  final String email;
+
+  RequesterAttributes({
+    required this.username,
+    required this.email,
+  });
+
+  factory RequesterAttributes.fromJson(Map<String, dynamic> json) {
+    return RequesterAttributes(
+      username: json['username'],
+      email: json['email'],
     );
   }
 }
