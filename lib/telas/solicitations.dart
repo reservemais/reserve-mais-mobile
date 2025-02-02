@@ -67,7 +67,7 @@ class _SolicitationsPageState extends State<SolicitationsPage> {
       case 'approved':
         return 'APROVADO';
       case 'disapproved':
-        return 'REJEITADO';
+        return 'REPROVADO';
       case 'pending':
         return 'PENDENTE';
       default:
@@ -162,7 +162,7 @@ class _SolicitationsPageState extends State<SolicitationsPage> {
                             },
                           ),
                           Text(
-                            'Rejeitado',
+                            'Reprovado',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: getStatusColor('disapproved'),

@@ -196,9 +196,12 @@ class _ReservationsCalendarPageState extends State<ReservationsCalendarPage> {
                   final events = filteredReservations.map((reservation) {
                     return CalendarEventData<CalendarEventData>(
                       title: reservation.attributes.title,
-                      date: DateTime.parse(reservation.attributes.start),
-                      startTime: DateTime.parse(reservation.attributes.start),
-                      endTime: DateTime.parse(reservation.attributes.end),
+                      date: DateTime.parse(reservation.attributes.start)
+                          .subtract(Duration(hours: 3)),
+                      startTime: DateTime.parse(reservation.attributes.start)
+                          .subtract(Duration(hours: 3)),
+                      endTime: DateTime.parse(reservation.attributes.end)
+                          .subtract(Duration(hours: 3)),
                       color: Color(int.parse(reservation.attributes.color
                           .replaceFirst('#', '0xff'))),
                     );

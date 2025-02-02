@@ -56,7 +56,7 @@ class _DetailsPageState extends State<DetailsPage> {
       case 'approved':
         return 'APROVADO';
       case 'disapproved':
-        return 'REJEITADO';
+        return 'REPROVADO';
       case 'pending':
         return 'PENDENTE';
       default:
@@ -65,7 +65,8 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 
   String formatDate(String date) {
-    final DateTime parsedDate = DateTime.parse(date);
+    final DateTime parsedDate =
+        DateTime.parse(date).subtract(Duration(hours: 3));
     return DateFormat('dd/MM/yyyy').format(parsedDate);
   }
 
@@ -120,9 +121,9 @@ class _DetailsPageState extends State<DetailsPage> {
                             'FIM', formatDate(reservation.attributes.end)),
                         _buildTableRow(
                           'HORÁRIO',
-                          "${DateTime.parse(reservation.attributes.start).hour.toString().padLeft(2, '0')}:${DateTime.parse(reservation.attributes.start).minute.toString().padLeft(2, '0')} "
+                          "${DateTime.parse(reservation.attributes.start).subtract(Duration(hours: 3)).hour.toString().padLeft(2, '0')}:${DateTime.parse(reservation.attributes.start).subtract(Duration(hours: 3)).minute.toString().padLeft(2, '0')} "
                               "ÀS "
-                              "${DateTime.parse(reservation.attributes.end).hour.toString().padLeft(2, '0')}:${DateTime.parse(reservation.attributes.end).minute.toString().padLeft(2, '0')}",
+                              "${DateTime.parse(reservation.attributes.end).subtract(Duration(hours: 3)).hour.toString().padLeft(2, '0')}:${DateTime.parse(reservation.attributes.end).subtract(Duration(hours: 3)).minute.toString().padLeft(2, '0')}",
                         ),
                         _buildTableRow(
                           'SOLICITANTE',
