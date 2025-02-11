@@ -1,6 +1,6 @@
 # Reserve+ App
 
-Aplicativo de Reservas de ambientes(Atualmente é um versão estendida estendida da versão Web).
+Aplicativo de gerenciamento de Reservas de ambientes(Atualmente é um versão estendida estendida da versão Web).
 
 ## Pré-requisitos
 * Reserve+ Web 
