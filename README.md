@@ -25,4 +25,5 @@ Aplicativo de gerenciamento de Reservas de ambientes(Atualmente é um versão es
 2. Execute o Docker;
 3. Execute o Android Studio;
 4. Crie e execute um Virtual Device Manager;
-5. Executar o metodo main do arquivo main.dart;
+6. Criar um usuário no Reserve+ Web; 
+6. Executar o metodo **main** do arquivo **main.dart**;
