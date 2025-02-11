@@ -5,7 +5,6 @@ Aplicativo de gerenciamento de Reservas de ambientes(Atualmente é um versão es
 ## Pré-requisitos
 * Reserve+ Web 
 * Docker
-* NPM
 * Flutter
 * Android Studio
 
